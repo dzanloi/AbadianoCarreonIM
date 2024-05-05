@@ -1,0 +1,127 @@
+:root {
+    --pink: #EE9CA7;
+    --color2: #f9004fd3;
+    --color3: #800000;
+    --fulvous: #D78521;
+    --eggshell: #E0E0CE;
+    --cardinal: #AD343E;
+    --night: #12130F;
+}
+
+*{
+    padding: 0;
+    margin: 0;
+    font-family: 'Jost', sans-serif;    
+    box-sizing: border-box;
+}
+body {
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-color: var(--fulvous);
+    max-width: 100%;
+    min-width: 65%;
+    overflow-x: hidden;
+}
+
+.logo {
+    text-decoration: none;
+    align-items: center;
+    width: 30%;
+    cursor: pointer;
+    display: flex;
+}
+.logo img {
+    width: 20.5%;
+    height: 20.5%;
+}
+.navigations {
+    flex-wrap: nowrap;
+    border-radius: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    overflow: hidden;
+    top: 2%;
+    width: 70%;
+    /* background-color: var(--color1); */
+    background-color: rgba(215, 215, 215, 0.3);
+    backdrop-filter: blur(5px);
+
+    left: 50%;     /*TIG CENTER SA NAVIGATION BAR */
+    transform: translate(-50%);
+}
+.navigations nav {
+    margin: 0px 5% 5px 5%;
+    align-items: center;
+    justify-content: space-between;
+    display: flex;
+    flex-wrap: nowrap;
+    max-width: 100%;
+    padding: 7px;
+}
+.navigations h2 {
+    cursor: pointer;
+    font-size: 45px;
+    font-weight: bolder;
+    color: var(--color3);
+}
+.navigations h2 span {
+    color: var(--color2);
+}
+.logo span {
+    color: var(--color2);
+    font-weight: bold;
+}
+nav ul li {
+    list-style-type: none;
+    display: inline-block;
+    padding: 10px 25px;
+
+}
+nav ul li a {
+    font-weight: 600;
+    font-size: 22px;
+    color: white;
+    text-decoration: none;
+    text-transform: capitalize;
+    position: relative;
+}
+nav ul li a:before {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: #FFF;
+    visibility: hidden;
+    transition: all 0.2s ease-in-out;
+}
+nav ul li a:hover:before{
+    visibility: visible;
+    width: 100%;
+}
+.all-btn {
+    display: flex;
+    gap: 10%;
+}
+.all-btn div {
+    cursor: pointer;
+    color: white;
+    background-color: var(--color2);
+    border: 1px solid transparent;
+    font-weight: bold;
+    padding: 8px 25px;
+    border-radius: 30px;
+}
+.all-btn div a {
+    text-decoration: none;
+    color: white;
+}
+.all-btn div:hover {
+    background-color: transparent;
+    backdrop-filter: blur(5px);
+    transition: .4s;
+    border: 1px solid #f9004d;
+}
