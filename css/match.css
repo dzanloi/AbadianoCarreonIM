@@ -1,23 +1,11 @@
-*, *:before, *:after {
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
-}
-
-body {
-  background: #CCFBFE;
-  overflow: hidden;
-  font-family: sans-serif;
-}
-
 .tinder {
-  width: 100vw;
+  width: 100%;
   height: 100vh;
   overflow: hidden;
   display: flex;
   flex-direction: column;
   position: relative;
-  opacity: 0;
+  /* opacity: 0; */
   transition: opacity 0.1s ease-in-out;
 }
 
@@ -57,7 +45,6 @@ body {
 
 .tinder--cards {
   flex-grow: 1;
-  padding-top: 40px;
   text-align: center;
   display: flex;
   justify-content: center;

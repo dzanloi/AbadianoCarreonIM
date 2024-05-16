@@ -9,19 +9,19 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
+    <link rel="stylesheet" href="css/dashboard.css">
       <meta charset="UTF-8">
       <title>Dashboard</title>
 
-      <link rel="stylesheet" href="css/dashboard.css">
       <!-- Boxicons CDN Link -->
       <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
    </head>
 
 <body>
-  <div class="sidebar">
+<div class="sidebar">
     <div class="logo-details">
-      <i class='bx bxl-c-plus-plus icon'></i>
+      <!-- <i class='bx bxl-c-plus-plus icon'></i> -->
         <div class="logo_name">teknopidu</div>
         <i class='bx bx-menu' id="btn" ></i>
     </div>
@@ -75,18 +75,18 @@
 
 
       <!-- DASHBOARDDDDDDDDDDDDDDDD -->
-      <li>
-        <a href="#">
+      <!-- <li>
+        <a href="dashboard.php">
           <i class='bx bx-grid-alt'></i>
           <span class="links_name">Dashboard</span>
         </a>
          <span class="tooltip">Dashboard</span>
-      </li>
+      </li> -->
 
 
       <!-- MATCHESSSSSS -->
       <li>
-       <a href="#">
+       <a href="dashboard.php">
          <i class='bx bx-user' ></i>
          <span class="links_name" id="startmatchingid">Start Matching</span>
        </a>
@@ -149,16 +149,40 @@
 
 
   <section class="home-section">
-    <div class="header">
-      <div class="text">Dashboard</div>
-    </div>
-
-    <!-- TODO: Add Cards or make a carousel that can only be imported here and it shows here -->
-    <div class="tochange">
+  <div class="header">
+    <div class="text">Chats | Messages</div>
+  </div>
+  <div class="wrapper">
+    <section class="users">
+      <header>
+        <div class="content">
+          <?php 
+            $sql = mysqli_query($connection, "SELECT * FROM tbluseraccount WHERE userid = {$_SESSION["id"]}");
+            if(mysqli_num_rows($sql) > 0){
+              $row = mysqli_fetch_assoc($sql);
+            }
+            $sql2 = mysqli_query($connection, "SELECT * FROM tblpictures WHERE userid = {$_SESSION["id"]}");
+            if(mysqli_num_rows($sql2) > 0){
+              $row2 = mysqli_fetch_assoc($sql2);
+            }
+          ?>
+          <img src="images/<?php echo $row2['url']; ?>" alt="">
+          <div class="details">
+            <span><?php echo $row['username']?></span>
+            <p><?php echo $row['status']; ?></p>
+          </div>
+        </div>
+      </header>
+      <div class="search">
+        <span class="text">Select a user to start chat</span>
+        <input type="text" placeholder="Enter name to search...">
+        <button><i class="fas fa-search"></i></button>
+      </div>
+      <div class="users-list">
       
-    </div>
-    
-
+      </div>
+    </section>
+  </div>
   </section>
 
 

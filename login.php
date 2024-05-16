@@ -32,7 +32,7 @@
       $_SESSION['profile']=$row['pictureid'];
       $_SESSION["id"]=$row['userid'];
        
-      header("Location: dashboard.php");
+      header("Location: match.php");
       exit();
 		}
 	}

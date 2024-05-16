@@ -227,13 +227,14 @@
   background: #E4E9F7;
   min-height: 100vh;
   top: 0;
-  left: 78px;
+  left: 30px;
   width: calc(100% - 78px);
+  /* width: 100vw; */
   transition: all 0.5s ease;
   z-index: 2;
 }
 .sidebar.open ~ .home-section{
-  left: 250px;
+  left: 110px;
   width: calc(100% - 250px);
 }
 .home-section .text{
