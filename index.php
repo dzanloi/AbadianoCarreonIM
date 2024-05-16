@@ -1,296 +1,318 @@
 <?php 
- session_start();
- include 'php/connect.php';
-
-
-?>
-<?php	
-	if(isset($_POST['btnLogin'])){
-		$uname=$_POST['login-user'];
-		$pwd=$_POST['login-txtpassword'];
-		//check tbluseraccount if username is existing
-		$sql ="SELECT * FROM tbluseraccount WHERE username='".$uname."'";
-		
-		$result = mysqli_query($connection,$sql);	
-		
-		$count = mysqli_num_rows($result);
-		$row = mysqli_fetch_array($result);
-    $hashed_pass=$row['password'];
-
-		
-		if($count== 0){
-			echo "<script language='javascript'>
-						alert('username not existing.');
-				  </script>";
-		}else if(!password_verify($pwd,$hashed_pass)) {
-			echo "<script language='javascript'>
-						alert('Incorrect password');
-				  </script>";
-		}else{
-			
-			// header('location: dashboard.php');
-      $rows=mysqli_fetch_assoc($result);
-      $_SESSION['username']=$row['username'];
-      $_SESSION['profile']=$row['pictureid'];
-      $_SESSION["id"]=$row['userid'];
-      header("Location: dashboard.php");
-    
-      exit();
-		}
-	}
-?>
-
+  session_start();
+  include 'php/connect.php';
+  ?>
 
 <!DOCTYPE html>
-<html lang="en">
+
+<html>
   <head>
-    <link rel="stylesheet" href="styles.css" />
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <title>Teknopidu</title>
+      
+      <!-- Favicon -->
+      <link rel="icon" href="dogpaw.ico" >
+      
+      <!-- Bootstrap CSS -->
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css">
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Jost&family=Red+Hat+Display&family=Wix+Madefor+Display&display=swap" rel="stylesheet">
+      <!-- Bootstrap JS -->
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
 
+      <!-- CSS stylesheets -->
+      <link rel="stylesheet" href="css/index.css">
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Jost&family=Red+Hat+Display&family=Wix+Madefor+Display:wght@600&display=swap" rel="stylesheet">
+      <!-- Font Awesome -->
+      <script src="https://kit.fontawesome.com/218aac7a32.js" crossorigin="anonymous"></script>
 
+      <!-- Google Fonts -->
+      <link
+          href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;900&family=Ubuntu:wght@300;400;500;700&display=swap"
+          rel="stylesheet">
+      <link
+          href="https://fonts.googleapis.com/css2?family=Merriweather+Sans:wght@500&family=PT+Sans:wght@400;600;700&family=Rubik:wght@400;500&display=swap"
+          rel="stylesheet">
+      <link
+          href="https://fonts.googleapis.com/css2?family=Edu+QLD+Beginner:wght@400;700&family=Edu+SA+Beginner:wght@400;700&family=Edu+TAS+Beginner:wght@400;600&display=swap"
+          rel="stylesheet">
 
-    <title>TEKNOPIDU</title>
-
-    <script src="js/script.js"></script>
   </head>
 
-  
   <body>
 
-    <!-- <img src="backgroundfinal.png" alt="asdasd" id="background"> -->
+      <section class="landing-section" id="title" style="background-color: #ff4c68; 
+                                                        color: #FFF; 
+                                                        background: url('images/bakground.jpg'); 
+                                                        background-size: cover;
+                                                        background-repeat: no-repeat;
+                                                        height: 100vh;">
+          <div class="container-fluid">
 
-    <!-- THIS IS FOR NAVIGATION BAR ONLY -->
-    <div class="navigations">
-      <nav>
+              <!-- Nav Bar -->
+              <nav class="navbar  navbar-expand-lg navbar-dark">
+                  <!-- Brand Name -->
+                  <a class="navbar-brand" href="#testimonials"><img src="images/cit-logo.png" class="logo" alt="cit logo"> teknopidu </a>
+                  <!-- Dropdown Button -->
+                  <button class="navbar-toggler" type="button" data-bs-toggle="collapse"            data-bs-target="#navbarNavDropdown"
+                      aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle  navigation">
+                      <span class="navbar-toggler-icon"></span>
+                  </button>
+                  <!--Navbar Items-->
+                  <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                      <ul class="navbar-nav ms-auto">
+                          <li class="nav-item">
+                              <a class="nav-link" href="#footer"> <i class="fas fa-home fa-sm fa-fw"></i></a>
+                          </li>
+                          <div class="vr"></div>
+                          <li class="nav-item">
+                              <a class="nav-link" href="#pricing"> About Us</a>    
+                          </li>
+                          <div class="vr"></div>
+                          <li class="nav-item">
+                              <a class="nav-link" href="#cta"> <i class="fas fa-download fa-sm fa-fw "></i></a>
+                          </li>
+                      </ul>
+                  </div>
+              </nav>
 
-        <a href="index.php" class="logo" id="logo">
-          <img src="images/cit.png" alt="cit_logo">
-          <h2>TEKNO<span>PIDU</span></h2>
-        </a>
+              <!-- Title -->
 
-          <ul>
-            <li><a href="home.html">Home</a></li>
-            <li><a href="about_us.html">About Us</a></li>
-            <li><a href="#contacts">Contact Us</a></li>
-          </ul>
-  
-          <div class="all-btn">
-            <div class="btn" id="reg_btn" onclick="Register()" >Register</div>
-            <div class="btn" id="login_btn" onclick="Login()">Login</div>
-          </div>
-      </nav>
-    </div>
-
-    <div class="landing_page">
-      <div class="header">
-        <h1>CIT LOVES AGAIN!</h1>
-        <p>Feeling Lonely? Spark a connection with someone special
-          here in CIT-U!!
-        </p>
-      </div>
-      <!-- <h1>CIT LOVES <br><span> AGAIN!</span></h1> -->
-      <!-- <div class="header_details">
-        <p>Feeling Lonely? Spark a connection with someone special
-          here in CIT-U!!
-        </p>
-      </div> -->
-    </div>
-
-
-
-
-    <div class="login_pop" id="login_pop">
-
-      <form action="index.php" method="post" class="center" id="login">
-        <h1>Log In</h1>
-
-        <div class="emailfield">
-          <h3></h3>
-          
-          <p>Need and account? <a href="http://">Sign up</a></p>
-        </div>
-        <div class="toflex">
-                <img src="images/user.png" id="logos"alt="">
-                <input type="text" name="login-user" placeholder="Username">
-
-          </div>
-          <p id="usernameError">Username not existing</p>
-      
-          <div class="toflex">
-                <img src="images/padlock.png" id="logos"alt="">
-                <input type="password" name="login-txtpassword" placeholder="Password">
-
-          </div>
-          <p id="passwordError">Incorrect password</p>
-       
-        <input type="submit" name=btnLogin id="submit" value="Login" >
-       
-      </form>
-    </div>
-
-
-
-    <div class="register-pop" id="register-pop" >
-      <div class="center">
-     
-        <form class="register-form" method="post" >
-       
-           
-               <h1>Signup</h1>
-           
-           
-    
-              <!-- <label for="#email">Email</label><br> -->
-           
-            
-              <!-- <label for="txtgender">Gender</label> -->
-             
-          
-              <!-- <label for="#firstname">first name</label><br> -->
-              <input type="text" id="firstname" placeholder="Firstname" name="txtfirstname"><br>
-              
-              <!-- <label for="#lastname">last name</label><br> -->
-              <input type="text" id="lastname"  placeholder="Lastname" name="txtlastname"><br>
-              <div class="toflex">
-                <!-- <img src="images/mail.png" id="logos"alt=""> -->
-                <input type="email" id="email" name="txtemail" placeholder="Email"><br>
-
+              <div class="row">
+                  <!--Title Text-->
+                  <div class="col-lg-6">
+                      <h1 class="big-heading" style="text-shadow:
+                                                    -1px -1px 0 #000,
+                                                    1px -1px 0 #000,
+                                                    -1px 1px 0 #000,
+                                                    1px 1px 0 #000;">Spark a connection with someone special here in CIT-U!!</h1>
+                      <!-- Register Buttons -->
+                      <a href="register.php"><button type="button" class="btn btn-dark btn-lg download-button"><i class="fa fa-sign-in" aria-hidden="true"></i> Sign in</button></a>
+                      <a href="login.php"><button type="button" class="btn btn-outline-light btn-lg download-button"><i class="fas fa-sign-in-alt fa-sm fa-fw"></i> Log in</button></a>
+                  </div>
+                  <!--Title Image-->
+                  <div class="col-lg-6" >
+                      <!-- <img src="images/citlandingstudents.png" class="students" alt=""> -->
+                      <!-- <img src="images/citlandingstudents.png" class="title-image img" alt="iphone-mockup">     -->
+                  </div>
               </div>
-          <div class="toflex">
-                <img src="images/woman.png" id="gender"alt="">
-                <select id="txtgender" name="txtgender">
-                <option value="Male">Male</option>
-                <option value="Female">Female</option>
-              </select><br>
+
           </div>
-              <!-- <label for="#username">Username</label><br> -->
-              <input type="text" id="username"  placeholder="Username" name="txtusername"><br>
-       
-              <!-- <label for="#password">Password</label><br> -->
-              <input type="password" id="password"  placeholder="Password" name="txtpassword"><br>
 
-              <!-- <label for="#checkPassword">Confirm password</label><br> -->
-              <input type="password" id="checkPassword"  placeholder="Confirm Password" name="checkPassword"><br>
- 
-              <input type="submit" name=btnRegister id="submit" value="Register" >
- 
-           
-     
-</form>
-       
-      </div>
-    </div>
+    </section>
 
+    <!-- Features -->
 
+    <section class="white-section"  id="features">
 
+      <div class="container-fluid">
 
-    <footer>
-      <!-- <div class="cit_logo_footer"> -->
-        <img id="citlogo" src="images/logocit-1.png" alt="citfooter">
-      <!-- </div> -->
-
-      <div class="box1" id="contacts">
-        <h1>Contact Us</h1>
-
-        <p>Carreon, John Loi D.</p>
-        <ul>
-          <li>155-6 Sanciangko St., Cebu City</li>
-          <li>0969-533-1788</li>
-        </ul>
-
-        <p>Abadiano, Jan Edward V.</p>
-        <ul>
-          <li>Banilad, Cebu City</li>
-          <li>09numbersninico</li>
-        </ul>
-      </div>
-
-
-      <div class="box2">
-        <h1>Get in Touch</h1>
-        <div class="icons">
-          <a href="https://www.facebook.com/apollo.raval" target="_blank"><img src="images/fb.png" ></a>
-          <a href="http://www.instagram.com" target="_blank"><img src="images/ig.png"></a>
-          <a href="linkedin.com" target="_blank"><img src="images/linkedin.png"></a>
-          <a href="http://"><img src="images/twitter.png"></a>
-        </div>
-        
-        
-        <div class="search">
-          <input type="text" placeholder="Search">
-
-          <div id="search_background">
-            <img src="images/search.png" alt="">
+        <div class="row">
+          <!-- Column 1 -->
+          <div class="col-lg-4 feature-box">
+            <i class="fa-solid fa-circle-check fa-4x feature-icon "></i>
+            <h3 class="feature-heading">Easy to use.</h3>
+            <p class="feature-text">So easy to use, even your dog could do it.</p>
+          </div>
+          <!-- Column 2 -->
+          <div class="col-lg-4  feature-box">
+            <i class="fa-solid fa-bullseye fa-4x feature-icon"></i>
+            <h3 class="feature-heading">Flexible</h3>
+            <p class="feature-text">We have the all-rounder clients from all rograms here in CIT-U.</p>
+          </div>
+          <!-- Column 3 -->
+          <div class="col-lg-4  feature-box">
+            <i class="fa-solid fa-heart fa-4x feature-icon"></i>
+            <h3 class="feature-heading">Guaranteed to work.</h3>
+            <p class="feature-text">Find the love of your life or your money back.</p>
           </div>
         </div>
-        
+
       </div>
 
+    </section>
 
 
+    <!-- Testimonials -->
+
+    <section class="colored-section" id="testimonials">
+
+      <!-- Carousel -->
+      <div id="testimonial-carousel" class="carousel slide " data-bs-ride="carousel" data-bs-interval="2500" data-bs-pause="hover">
+
+        <!-- Carousel Indicators -->
+        <div class="carousel-indicators">
+          <!-- Slide 1 -->
+          <button type="button" data-bs-target="#testimonial-carousel" data-bs-slide-to="0" class="active" aria-current="true"
+          aria-label="Slide 1"></button>
+          <!-- Slide 2 -->
+          <button type="button" data-bs-target="#testimonial-carousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+        </div>
+
+        <!-- Carousel Content -->
+        <div class="carousel-inner">
+          <!-- Item 1 -->
+          <div class="carousel-item active container-fluid"</div>
+            <h2 class="testimonial-text">"I no longer have to wander other dating apps for love. I've found the hottest Technologian on Teknopidu, All hail!"</h2>
+            <img src="images/darwin.jpg" class="testimonial-image" alt="dog-profile">
+            <em class="testimonial-name">Darwin Darryl Largoza</em>
+          </div>
+          <!-- Item 2 -->
+          <div class="carousel-item container-fluid">
+            <h2 class="testimonial-text">"I used to be so lonely, but with teknopidu's help, I've found the love of my life."</h2>
+            <img class="testimonial-image" src="images/nico.jpg" alt="lady-profile">
+            <em class="testimonial-name">Nicolas Abadanio</em>
+          </div>
+        </div>
+
+        <!-- Carousel Controls -->
+        <div class="carousel-controls">
+          <!-- Previous Button -->
+          <button class="carousel-control-prev" type="button" data-bs-target="#testimonial-carousel" data-bs-slide="prev">
+            <span class="fa-solid fa-3x fa-circle-chevron-left control-icon"></span>
+          </button>
+          <!-- Next Button -->
+          <button class="carousel-control-next" type="button" data-bs-target="#testimonial-carousel" data-bs-slide="next">
+            <span class="fa-solid fa-3x fa-circle-chevron-right control-icon"></span>
+          </button>
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- Press -->
+
+    <section class="colored-section" id="press">
+
+      <!-- Press Logos -->
+      <img class="press-logo" src="images/techcrunch.png" alt="tc-logo">
+      <img class="press-logo" src="images/tnw.png" alt="tnw-logo">
+      <img class="press-logo" src="images/bizinsider.png" alt="biz-insider-logo">
+      <img class="press-logo" src="images/mashable.png" alt="mashable-logo">
+
+    </section>
+
+
+    <!-- Pricing -->
+
+    <section class="white-section" id="pricing">
+      
+      <div class="container-fluid" >
+        
+        <!-- Price Heading -->
+        <h2 class="section-heading">In Shop</h2>
+        <p >Simple and affordable price plans for your full match potentials</p>
+
+        <!-- Price Cards --->
+        <div class="row row-cols-lg-3 row-cols-md-3 row-cols-1 g-3 ">
+
+        <!-- Coloumn 1 -->
+          <div class=" price-col col col-lg-4 col-md-4 col-sm-6 ">
+          <!-- Card -->
+            <div class="card border-light bg-light h-100">
+              <!-- Card Header -->
+              <div class="card-header border-dark">
+                <h3 class=" price-title " >Tansan</h3>
+              </div>
+              <!-- Card Body -->
+              <div class="card-body">
+                <h2 class="price-text" >Free</h2>
+                <p>5 Matches Per Day</p>
+                <p>10 Messages Per Day</p>
+                <p>Unlimited App Usage</p>
+                <button type="button" class="w-100 price-btn btn btn-block btn-outline-dark btn-lg"> Sign Up for free </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Coloumn 2 -->
+          <div class=" price-col col col-lg-4 col-md-4 col-sm-6">
+            <!-- Card -->
+            <div class="card border-light bg-light h-100">
+              <!-- Card Header -->
+              <div class="card-header border-dark">
+                <h3 class=" price-title " >Silver</h3>
+              </div>
+              <!-- Card Body -->
+              <div class="card-body">
+                <h2 class="price-text" >₱49 / mo</h2>
+                <p>Unlimited Matches</p>
+                <p>Unlimited Messages</p>
+                <p>Unlimited App Usage</p>
+                <button type="button" class=" w-100 price-btn btn btn-block btn-dark btn-lg"> Get started </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Coloumn 3 -->
+          <div class=" price-col col col-lg-4 col-md-4 col-sm-12 ">
+            <!-- Card -->
+            <div class="card border-light bg-light h-100">
+              <!-- Card Header -->
+              <div class="card-header border-dark">
+                <h3 class=" price-title " >Gold</h3>
+              </div>
+              <!-- Card Body -->
+              <div class="card-body">
+                <h2 class="price-text" >₱99 / mo</h2>
+                <p>Unlimited Matches</p>
+                <p>Unlimited Messages</p>
+                <p>Unlimited App Usage</p>
+                <button type="button" class=" w-100 price-btn btn btn-block btn-dark btn-lg"> Contact us </button>
+              </div>
+            </div>
+          </div> 
+
+        </div>
+          
+      </div>    
+
+    </section>
+
+
+    <!-- Call to Action -->
+
+    <section class="colored-section" id="cta">
+
+      <div class="container-fluid" >
+
+        <!-- CTA Heading -->
+        <h3 class="big-heading">Find the one True Lo<i class="fa-solid fa-heart"></i>e at CIT-U Today</h3>
+        
+        <!-- Download Buttons -->
+        <button type="button" class=" btn btn-dark btn-lg download-button"><i class="fa-brands   fa-apple"></i> Download </button>
+        <button type="button" class=" btn btn-outline-light btn-lg download-button"> <i class="fa-brands fa-google-play"></i> Download </button>
+
+      </div>
+      
+
+    </section>
+
+
+    <!-- Footer -->
+
+    <footer class="white-section" id="footer">
+
+      <div class="container-fluid">
+
+        <!-- Twitter Icon -->
+        <a href="#" alt="twitter-icon"><i class="fa-brands fa-twitter footer-icon"></i></a>
+        <!-- Facebook Icon -->
+        <a href="#" alt="facebook-icon"><i class="fa-brands fa-facebook footer-icon"></i></a>
+        <!-- Instagram Icon -->
+        <a href="#" alt="instagram-icon"><i class="fa-brands fa-instagram footer-icon"></i></a>
+        <!-- Envelope Icon -->
+        <a href="#" alt="envelope-icon"><i class="fa-solid fa-envelope footer-icon"></i></a>
+        <!-- Copyright -->
+        <p class="footer-text">Made by <br> John Loi Carreon <br> Jan Edward Abadiano</p>
+        
+      </div>
+      
 
     </footer>
 
+
   </body>
+
 </html>
-
-
-
-
-
-<?php	
-    if(isset($_POST['btnRegister'])){		
-        //retrieve data from form and save the value to a variable
-        //for tbluserprofile
-        $fname = $_POST['txtfirstname'];		
-        $lname = $_POST['txtlastname'];
-        $gender = $_POST['txtgender'];
-        
-        //for tbluseraccount
-        $email = $_POST['txtemail'];		
-        $uname = $_POST['txtusername'];
-        $pword = $_POST['txtpassword'];
-        $cpass= $_POST['checkPassword'];
-       
-        $sql2 = "SELECT * FROM tbluseraccount WHERE username='$uname'";
-        $result = mysqli_query($connection, $sql2);
-        $row = mysqli_num_rows($result);
-        if($row == 0){
-
-        
-        //save data to tbluserprofile			
-        $sql1 = "INSERT INTO tbluser (firstname, lastname, gender) VALUES ('$fname', '$lname', '$gender')";
-        mysqli_query($connection, $sql1);
-       
-      
-        //Check tbluseraccount if username is already existing. Save info if false. Prompt msg if true.
-          $user_id =mysqli_insert_id($connection);
-          $finpass=password_hash($pword,PASSWORD_DEFAULT);
-          
-            $sql = "INSERT INTO tbluseraccount (email,username,password,userid) VALUES ('$email', '$uname', '$finpass','$user_id')";
-            mysqli_query($connection, $sql);
-            $dflt="nothing";
-  
-            $sql3 = "INSERT INTO tblpreference (userid,preferedcourse,preferedgender,preferedminimumage,preferedmaximumage) VALUES ('$user_id','$dflt','$dflt','18','30')";
-            mysqli_query($connection, $sql3);
-            
-            $sql4 = "INSERT INTO tblpictures (userid) VALUES ('$user_id')";
-            mysqli_query($connection, $sql4);
-        } else {
-            echo "<script language='javascript'>
-                        alert('Username already existing');
-                  </script>";
-        }    
-    }
-?>  
-
