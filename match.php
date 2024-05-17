@@ -9,8 +9,8 @@
 
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" href="css/match.css">
-  <link rel="stylesheet" href="css/dashboard.css">
+<link rel="stylesheet" href="css/match.css?v1">
+  <link rel="stylesheet" href="css/dashboard.css?v1">
   <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="https://hammerjs.github.io/dist/hammer.min.js"></script>
