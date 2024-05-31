@@ -183,7 +183,7 @@
         <div class="tinder--card">
           <img src="images/brix.png">
           <h3>Brix Bitayo</h3>
-          <p>I need gwapa.</p>
+          <p>Looking for FUBU.</p>
         </div>
         <div class="tinder--card">
           <img src="images/yana.png">
